@@ -1,3 +1,4 @@
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -318,5 +319,36 @@ public class DatabaseRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Integer> getAllInventoryIds() {
+        List<Integer> inventoryIds = new ArrayList<>();
+        String sql = "SELECT idinventory FROM inventory";
+        try (Connection connection = DatabaseConnection.getconnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                inventoryIds.add(resultSet.getInt("idinventory"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return inventoryIds;
+    }
+
+    public Inventory getInventoryById(int id) {
+        String sql = "SELECT * FROM inventory WHERE idinventory = ?";
+        try (Connection connection = DatabaseConnection.getconnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int userId = resultSet.getInt("iduser");
+                List<Item> items = initiateInventory(id);
+                return new Inventory(id, userId, 0, 0, items);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } return null;
     }
 }
