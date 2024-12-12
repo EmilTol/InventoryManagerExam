@@ -47,7 +47,7 @@ public class Main {
                         System.out.println(answer);
                     }
                     case 2 -> {
-                        System.out.println("You chose 2 see a list of items");
+                        System.out.println("You chose 2 see a list of items, hej Annika");
                         List<Item> items1 = repository.getAllItems();
                         for (Item item : items1) {
                             System.out.println(item);
