@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/invTest";
+    private static final String URL = "jdbc:mysql://localhost:3306/inventorymanager";
 
     private static final String USER = "root";
 
