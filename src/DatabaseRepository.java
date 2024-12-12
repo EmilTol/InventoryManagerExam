@@ -150,7 +150,20 @@ public class DatabaseRepository {
                 String description = resultSet.getString("description");
                 int effect = resultSet.getInt("effect");
 
-                items.add(new Item(iditemtest, name, type, weight, description, effect));
+                if (type.equals("Armor")) {
+                    Item item = new Armor(iditemtest, name, type, weight, description, effect);
+                    items.add(new Armor(iditemtest, name, type, weight, description, effect));
+                }
+                else if (type.equals("Weapon")){
+                    Item item = new Weapon(iditemtest, name, type, weight, description, effect);
+                    items.add(new Weapon(iditemtest, name, type, weight, description, effect));
+                }
+                else if (type.equals("Consumable")) {
+                    Item item = new Consumable(iditemtest, name, type, weight, description, effect);
+                    items.add(new Consumable(iditemtest, name, type, weight, description, effect));
+                }
+
+                //items.add(new Item(iditemtest, name, type, weight, description, effect));
 
             }
         } catch (SQLException e) {

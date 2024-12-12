@@ -47,7 +47,7 @@ public class Main {
                         System.out.println(answer);
                     }
                     case 2 -> {
-                        System.out.println("You chose 2 see a list of");
+                        System.out.println("You chose 2 see a list of itemskkkfkfkfkfkfkfk");
                         List<Item> items1 = repository.getAllItems();
                         for (Item item : items1) {
                             System.out.println(item);
@@ -55,7 +55,7 @@ public class Main {
                     }
                     case 3 -> {
                         System.out.println("You chose 3");
-                        System.out.println("Indtast id på 'Item' du vil opdatere");
+                        System.out.println("Indtast id på 'Item' du vil opdatere, uasuiauifubf");
                         int id = input.nextInt();
                         input.nextLine();
                         System.out.println("Indtast navn på 'Item'");
@@ -75,7 +75,7 @@ public class Main {
                     }
                     case 4 -> {
                         System.out.println("You chose 4");
-                        System.out.println("Indtast id for 'Item', der skal slettes");
+                        System.out.println("Indtast id for 'Item', der skal slettes !!=!=!=!=!=!=!=!=!=!=");
                         int id = input.nextInt();
                         String deleted = repository.deleteItem(id);
                         System.out.println(deleted);
