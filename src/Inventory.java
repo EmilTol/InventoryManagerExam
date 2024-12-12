@@ -26,7 +26,7 @@ public class Inventory {
         this.slotCurrent = slotCurrent;
         this.slotCurrentMax = slotCurrentMax;
         this.weightCurrent = weightCurrent;
-        this.items = new ArrayList<Item>(items);
+        this.items = items;
     }
 
     public int getId() {
