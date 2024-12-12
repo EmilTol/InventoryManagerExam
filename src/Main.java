@@ -75,7 +75,7 @@ public class Main {
                     }
                     case 4 -> {
                         System.out.println("You chose 4");
-                        System.out.println("Indtast id for 'Item', der skal slettes");
+                        System.out.println("Indtast id for 'Item', der skal slettes !!=!=!=!=!=!=!=!=!=!=");
                         int id = input.nextInt();
                         String deleted = repository.deleteItem(id);
                         System.out.println(deleted);
