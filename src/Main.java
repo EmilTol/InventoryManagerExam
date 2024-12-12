@@ -55,7 +55,7 @@ public class Main {
                     }
                     case 3 -> {
                         System.out.println("You chose 3");
-                        System.out.println("Indtast id på 'Item' du vil opdatere");
+                        System.out.println("Indtast id på 'Item' du vil opdatere, uasuiauifubf");
                         int id = input.nextInt();
                         input.nextLine();
                         System.out.println("Indtast navn på 'Item'");
