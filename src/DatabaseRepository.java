@@ -8,7 +8,7 @@ public class DatabaseRepository {
     }
 
     public String addItem(Item item) {
-        String sql = "INSERT INTO itemtest (iditemtest, name, type, weight, description, effect) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO item (iditem, name, type, weight, description, effect) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, item.getId());
@@ -37,12 +37,12 @@ public class DatabaseRepository {
     //    //read
     public List<Item> getAllItems() {
         List<Item> items = new ArrayList<>();
-        String sql = "SELECT * FROM itemtest";
+        String sql = "SELECT * FROM item";
         try (Connection connection = DatabaseConnection.getconnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
-                int id = resultSet.getInt("iditemtest");
+                int id = resultSet.getInt("iditem");
                 String name = resultSet.getString("name");
                 String type = resultSet.getString("type");
                 int weight = resultSet.getInt("weight");
@@ -59,7 +59,7 @@ public class DatabaseRepository {
 
     //update
     public String updateItem(Item item) {
-        String sql = "UPDATE itemtest SET name = ?, type = ?, weight = ?, description = ?, effect = ? WHERE iditemtest = ?";
+        String sql = "UPDATE item SET name = ?, type = ?, weight = ?, description = ?, effect = ? WHERE iditem = ?";
 
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -83,7 +83,7 @@ public class DatabaseRepository {
 
     //    //delete
     public String deleteItem(int id) {
-        String sql = "DELETE FROM itemtest WHERE iditemtest = ?";
+        String sql = "DELETE FROM item WHERE iditem = ?";
 
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -99,7 +99,7 @@ public class DatabaseRepository {
     }
 
     public int createNewInventory(int idUser){
-        String sql = "INSERT INTO invtest (iduser) VALUES (?);";
+        String sql = "INSERT INTO inventory (iduser) VALUES (?);";
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             preparedStatement.setInt(1, idUser);
@@ -132,18 +132,18 @@ public class DatabaseRepository {
 
     public List <Item> initiateInventory(int inventoryId) {
         List<Item> items = new ArrayList<>();
-        String sql = "SELECT invtest.idinvtest, itemtest.*\n" +
-                "FROM invtest\n" +
-                "JOIN invhasitemtest ON invtest.idinvtest = invhasitemtest.fkinvtest\n" +
-                "JOIN itemtest ON invhasitemtest.fkitemtest = itemtest.iditemtest\n" +
-                "WHERE idinvtest = ?";
+        String sql = "SELECT inventory.idinventory, item.*\n" +
+                "FROM inventory\n" +
+                "JOIN inventoryhasitem ON inventory.idinventory = inventoryhasitem.fkinventory\n" +
+                "JOIN item ON inventoryhasitem.fkitem = item.iditem\n" +
+                "WHERE idinventory = ?";
 
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setInt(1, inventoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int iditemtest = resultSet.getInt("iditemtest");
+                int iditemtest = resultSet.getInt("iditem");
                 String type = resultSet.getString("type");
                 String name = resultSet.getString("name");
                 int weight = resultSet.getInt("weight");
@@ -161,8 +161,8 @@ public class DatabaseRepository {
 
     public int initiateMaxSlots(int inventoryId) {
         String sql = "SELECT slotcurrentmax\n" +
-                "FROM invtest\n" +
-                "WHERE idinvtest = ?";
+                "FROM inventory\n" +
+                "WHERE idinventory = ?";
 
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
@@ -180,8 +180,8 @@ public class DatabaseRepository {
 
     public int initiateSlots(int inventoryId) {
         String sql = "SELECT slotcurrent\n" +
-                "FROM invtest\n" +
-                "WHERE idinvtest = ?";
+                "FROM inventory\n" +
+                "WHERE idinventory = ?";
 
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
@@ -198,7 +198,7 @@ public class DatabaseRepository {
     }
 
     public String setSlotSize(int slotNewMax, int inventoryId) {
-        String sql = "UPDATE invtest SET slotcurrentmax = ? WHERE idinvtest = ?";
+        String sql = "UPDATE inventory SET slotcurrentmax = ? WHERE idinventory = ?";
 
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -216,12 +216,12 @@ public class DatabaseRepository {
         return "Slot size updated in database";
     }
 
-    public String addItemToInventory(int fkinvtest, int fkitemtest) {
-        String sql = "INSERT INTO invhasitemtest (fkinvtest, fkitemtest) VALUES (?, ?)";
+    public String addItemToInventory(int fkinventory, int fkitem) {
+        String sql = "INSERT INTO inventoryhasitem (fkinventory, fkitem) VALUES (?, ?)";
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, fkinvtest);
-            preparedStatement.setInt(2, fkitemtest);
+            preparedStatement.setInt(1, fkinventory);
+            preparedStatement.setInt(2, fkitem);
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
@@ -236,7 +236,7 @@ public class DatabaseRepository {
     }
 
     public String setSlot(int currentSlot, int inventoryId){
-        String sql = "UPDATE invtest SET slotcurrent = ? WHERE idinvtest = ?";
+        String sql = "UPDATE inventory SET slotcurrent = ? WHERE idinventory = ?";
 
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -253,12 +253,12 @@ public class DatabaseRepository {
         return ("Slots updated");
     }
 
-    public String removeItemFromInventory(int fkinvtest, int fkitemtest) {
-        String sql = "DELETE FROM invhasitemtest\nWHERE fkinvtest = ? AND fkitemtest = ?\nLIMIT 1";
+    public String removeItemFromInventory(int fkinventory, int fkitem) {
+        String sql = "DELETE FROM inventoryhasitem\nWHERE fkinventory = ? AND fkitem = ?\nLIMIT 1";
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, fkinvtest);
-            preparedStatement.setInt(2, fkitemtest);
+            preparedStatement.setInt(1, fkinventory);
+            preparedStatement.setInt(2, fkitem);
 
             int deletedRows = preparedStatement.executeUpdate();
             if (deletedRows > 0) {
@@ -274,14 +274,14 @@ public class DatabaseRepository {
 
     public Item getOneItem(int id) {
 
-        String sql = "SELECT * FROM itemtest WHERE iditemtest = ?";
+        String sql = "SELECT * FROM item WHERE iditem = ?";
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
 
-                    int idItemTest = resultSet.getInt("iditemtest");
+                    int idItemTest = resultSet.getInt("iditem");
                     String name = resultSet.getString("name");
                     String type = resultSet.getString("type");
                     int weight = resultSet.getInt("weight");
