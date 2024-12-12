@@ -294,22 +294,22 @@ public class DatabaseRepository {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
 
-                    int idItemTest = resultSet.getInt("iditem");
+                    int idItem = resultSet.getInt("iditem");
                     String name = resultSet.getString("name");
                     String type = resultSet.getString("type");
                     int weight = resultSet.getInt("weight");
                     String description = resultSet.getString("description");
                     int effect = resultSet.getInt("effect");
                     if (type.equals("Armor")) {
-                        Item item = new Armor(idItemTest, name, type, weight, description, effect);
+                        Item item = new Armor(idItem, name, type, weight, description, effect);
                         return item;
                     }
                     else if (type.equals("Weapon")){
-                        Item item = new Weapon(idItemTest, name, type, weight, description, effect);
+                        Item item = new Weapon(idItem, name, type, weight, description, effect);
                         return item;
                     }
                     else if (type.equals("Consumable")) {
-                        Item item = new Consumable(idItemTest, name, type, weight, description, effect);
+                        Item item = new Consumable(idItem, name, type, weight, description, effect);
                         return item;
                     }
                 }

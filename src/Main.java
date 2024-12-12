@@ -153,7 +153,7 @@ public class Main {
                         String exported = inventory.exportInventory();
                         System.out.println(exported);
                     }
-                    case 12 -> {
+                    case 12 -> { // Case til at søge basseret på vægt
                         System.out.println("You chose 12\nPress 1 to search from highest weight to lowest weight\nPress 2 to search from lowest weight to highest weight");
                         int searchType = input.nextInt();
                         if (searchType == 2) {
