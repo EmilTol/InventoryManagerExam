@@ -97,7 +97,7 @@ public class Inventory {
         System.out.println(item.getType());
         if (checkWeight(item, weightCurrent, weightMax)) {
             if (checkItemStack(items, item)) { // Kalder CheckItemStack korrekt
-                System.out.println(item.getName());
+//                System.out.println(item.getName());
                 if (slotCurrent <= slotCurrentMax) {
                     String added = repository.addItemToInventory(invId, itemId);
                     weightCurrent += item.getWeight();

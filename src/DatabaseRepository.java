@@ -222,7 +222,7 @@ public class DatabaseRepository {
 
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows > 0) {
-                System.out.println("updated...");
+                System.out.println("Updated...");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -181,7 +181,7 @@ public class Main {
                         System.out.println("You have chosen to expand your inventory capacity.");
                         System.out.println("Updating inventory size...");
                         String slotSize = inventory.increaseMaxSlot(inventory.getSlotCurrentMax(), inventory.getSlotMax(), inventory.getId()); // Er måske dum, men øger vi ikke maxslots?
-                        System.out.println(slotSize);
+                        System.out.println("You now have a total of " + slotSize + " slots");
                     }
                     case 11 -> {
                         System.out.println("You have chosen to save your inventory to a text file.");
