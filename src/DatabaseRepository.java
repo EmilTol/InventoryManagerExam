@@ -222,7 +222,7 @@ public class DatabaseRepository {
 
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows > 0) {
-                System.out.println("Updated...");
+                System.out.println("Updated in database");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -259,7 +259,7 @@ public class DatabaseRepository {
             preparedStatement.setInt(2, inventoryId);
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows > 0) {
-                System.out.println("Slots updated");
+                //System.out.println("Slots updated");
             }
         } catch (SQLException e) {
             e.printStackTrace();
