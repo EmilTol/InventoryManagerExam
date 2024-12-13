@@ -92,14 +92,14 @@ public class Inventory {
         }
     }
 
-    public String addItemToInventory(int invId, int itemid) {
-        Item item = repository.getOneItem(itemid);
+    public String addItemToInventory(int invId, int itemId) {
+        Item item = repository.getOneItem(itemId);
         System.out.println(item.getType());
         if (checkWeight(item, weightCurrent, weightMax)) {
             if (checkItemStack(items, item)) { // Kalder CheckItemStack korrekt
                 System.out.println(item.getName());
                 if (slotCurrent <= slotCurrentMax) {
-                    String added = repository.addItemToInventory(invId, itemid);
+                    String added = repository.addItemToInventory(invId, itemId);
                     weightCurrent += item.getWeight();
                     items.add(item);
                     System.out.println("Item added: " + item);
@@ -108,7 +108,7 @@ public class Inventory {
                     return "No available slots.";
                 }
             } else if (checkAvailableSlot(slotCurrent, slotCurrentMax)) {
-                String added = repository.addItemToInventory(invId, itemid);
+                String added = repository.addItemToInventory(invId, itemId);
                 items.add(item);
                 slotCurrent++;
                 String slotSet = repository.setSlot(slotCurrent, invId);
@@ -124,14 +124,14 @@ public class Inventory {
         }
     }
 
-    public String removeItemFromInventory(int invId, int itemid) {
-        Item item = repository.getOneItem(itemid);
-        String removed = repository.removeItemFromInventory(invId, itemid);
+    public String removeItemFromInventory(int invId, int itemId) {
+        Item item = repository.getOneItem(itemId);
+        String removed = repository.removeItemFromInventory(invId, itemId);
         if (removed != null) {
             System.out.println(item + " to be removed");
             for (int i = 0; i < items.size(); i++) {
                 Item obj = items.get(i);
-                if (obj.getId() == itemid) {
+                if (obj.getId() == itemId) {
                     items.remove(i);
                     slotCurrent--;
                     if (checkItemStack(items, item)) {
