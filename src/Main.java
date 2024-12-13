@@ -158,11 +158,21 @@ public class Main {
                         List <Item> nonConsumableItems = inventory.showArmorAndWeapons(); // viser armor and weapons i inventory
                         System.out.println("Armor and weapons in inventory: ");
                         for (Item item : nonConsumableItems) {
-                            System.out.println(item);
+                            System.out.printf("%-15s %-15s %-30s %-10d%n",
+                                    item.getName(),
+                                    item.getType(),
+                                    item.getDescription(),
+                                    item.getEffect());
+                            //System.out.println(item);
                         }
                         System.out.println("\nConsumables: ");
                         for (Map.Entry<Item, Integer> entry : consumables.entrySet()) {
-                            System.out.println((entry.getValue()) + " of " + entry.getKey());
+                            System.out.printf("%-15s %-15s %-30s %-10d%n",
+                                    entry.getKey().getName(),
+                                    entry.getKey().getType(),
+                                    entry.getKey().getDescription(),
+                                    entry.getValue());
+                            //System.out.println((entry.getValue()) + " of " + entry.getKey());
                         }
                         System.out.println("\n" + inventory.getSlotCurrent() + " slots are used out of " + inventory.getSlotCurrentMax());
                         System.out.println("Current weight is " + inventory.getWeightCurrent() + "\n");
