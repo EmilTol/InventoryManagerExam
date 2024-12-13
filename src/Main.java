@@ -9,36 +9,35 @@ public class Main {
     public static void main(String[] args) {
         DatabaseRepository repository = new DatabaseRepository(); // Opretter en ny Databaserepository instans
         List <Item> items = new ArrayList<>(); // Opretter en tom liste af Item objekter
-        Inventory inventory = null;
         Scanner input = new Scanner(System.in);
-//        Inventory inventory = new Inventory(0,0, 0,0, items); // Opretter en ny inventory instans med "tomme" værdier
-//
-//        Scanner input = new Scanner(System.in);
-//
-//        System.out.println("---Initializing Inventory---");
-//        inventory = inventory.initiateInventory(1); // Initialisere inventory med id 1
+        Inventory inventory = new Inventory(0,0, 0,0, items); // Opretter en ny inventory instans med "tomme" værdier
 
-        System.out.println("Please choose the id of the inventory you want to use");
-        List<Integer> inventoryIds = repository.getAllInventoryIds();
-        for (Integer id : inventoryIds)
-            System.out.println("Inventory ID: " + id);
 
-        boolean validInventoryId = false;
-        while (!validInventoryId) {
-            try {
-                int selectedInventoryId = input.nextInt();
-                inventory = repository.getInventoryById(selectedInventoryId);
-                if (inventory != null) {
-                    validInventoryId = true;
-                    System.out.println("Initializing inventory with ID: " + selectedInventoryId);
-                } else {
-                    System.out.println("Invalid inventory ID, please try again");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input, Please type the number of the account ID");
-                input.nextLine();
-            }
-        }
+
+        System.out.println("---Initializing Inventory---");
+        inventory = inventory.initiateInventory(1); // Initialisere inventory med id 1
+
+//        System.out.println("Please choose the id of the inventory you want to use");
+//        List<Integer> inventoryIds = repository.getAllInventoryIds();
+//        for (Integer id : inventoryIds)
+//            System.out.println("Inventory ID: " + id);
+
+//        boolean validInventoryId = false;
+//        while (!validInventoryId) {
+//            try {
+//                int selectedInventoryId = input.nextInt();
+//                inventory = repository.getInventoryById(selectedInventoryId);
+//                if (inventory != null) {
+//                    validInventoryId = true;
+//                    System.out.println("Initializing inventory with ID: " + selectedInventoryId);
+//                } else {
+//                    System.out.println("Invalid inventory ID, please try again");
+//                }
+//            } catch (InputMismatchException e) {
+//                System.out.println("Invalid input, Please type the number of the account ID");
+//                input.nextLine();
+//            }
+//        }
 
         while (true) {
             System.out.println("Welcome to Legend of Zel... GameCraft\nChoose your poison\n1 to forge a new item" +
