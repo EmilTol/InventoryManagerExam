@@ -59,64 +59,64 @@ public class Main {
                 switch (choice) {
                     case 1 -> {
                         System.out.println("You have chosen to forge a new item.");
-//                        System.out.println("Enter item id");
-//                        int id = input.nextInt(); // Læser bruger input for "id" til et nyt item
-//                        input.nextLine();
-//                        System.out.println("Enter item name");
-//                        String name = input.nextLine(); // Læser bruger input for "name" til et nyt item
-//                        System.out.println("Enter item type");
-//                        String type = input.nextLine(); // Læser bruger input for "type" til et nyt item
-//                        System.out.println("Enter item weight");
-//                        int itemWeight = input.nextInt(); // Læser bruger input for "weight" til et nyt item
-//                        System.out.println("Enter item description");
-//                        input.nextLine();
-//                        String itemDescription = input.nextLine(); // Læser bruger input for "description" til et nyt item
-//                        System.out.println("Enter item effect");
-//                        int itemEffect = input.nextInt(); // Læser bruger input for "effect" til et nyt item
-//                        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
-                        String answer = useCase.createNewItem();
+                        System.out.println("Enter item id");
+                        int id = input.nextInt(); // Læser bruger input for "id" til et nyt item
+                        input.nextLine();
+                        System.out.println("Enter item name");
+                        String name = input.nextLine(); // Læser bruger input for "name" til et nyt item
+                        System.out.println("Enter item type");
+                        String type = input.nextLine(); // Læser bruger input for "type" til et nyt item
+                        System.out.println("Enter item weight");
+                        int itemWeight = input.nextInt(); // Læser bruger input for "weight" til et nyt item
+                        System.out.println("Enter item description");
+                        input.nextLine();
+                        String itemDescription = input.nextLine(); // Læser bruger input for "description" til et nyt item
+                        System.out.println("Enter item effect");
+                        int itemEffect = input.nextInt(); // Læser bruger input for "effect" til et nyt item
+                        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
+                        String answer = useCase.createNewItem(item);
                         System.out.println(answer);
                     }
                     case 2 -> {
                         System.out.println("You have chosen to view all items in the list");
                         useCase.getAllItems();
-//                        List<Item> items1 = repository.getAllItems(); // Henter alle items fra databasen
-//                        for (Item item : items1) {
-//                            System.out.println(item);
-//                        }
+                        List<Item> items1 = repository.getAllItems(); // Henter alle items fra databasen
+                        for (Item item : items1) {
+                            System.out.println(item);
+                        }
                     }
                     case 3 -> {
                         System.out.println("You have chosen to update an existing item.");
-                        String updated = useCase.updateItem();
+                        System.out.println("Enter the id of the item you want to update: ");
+                        int id = input.nextInt(); // Læser bruger input for "id" som skal opdateres
+                        input.nextLine();
+                        System.out.println("Enter the name of the item: ");
+                        String name = input.nextLine(); // Læser bruger input for "name" som skal opdateres
+                        System.out.println("enter the new type of the item: ");
+                        String type = input.nextLine(); // Læser bruger input for "type" som skal opdateres
+                        System.out.println("Enter the new weight of the item: ");
+                        int itemWeight = input.nextInt(); // Læser bruger input for "weight" som skal opdateres
+                        input.nextLine();
+                        System.out.println("Enter the new description of the item: ");
+                        String itemDescription = input.nextLine(); // Læser bruger input for "description" som skal opdateres
+                        System.out.println("Enter the new effect of the item: ");
+                        int itemEffect = input.nextInt(); // Læser bruger input for "effect" som skal opdateres
+                        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
+                        String updated = useCase.updateItem(item); // Kalder metoden updateItem
                         System.out.println(updated);
-//                        System.out.println("Enter the id of the item you want to update: ");
-//                        int id = input.nextInt(); // Læser bruger input for "id" som skal opdateres
-//                        input.nextLine();
-//                        System.out.println("Enter the name of the item: ");
-//                        String name = input.nextLine(); // Læser bruger input for "name" som skal opdateres
-//                        System.out.println("enter the new type of the item: ");
-//                        String type = input.nextLine(); // Læser bruger input for "type" som skal opdateres
-//                        System.out.println("Enter the new weight of the item: ");
-//                        int itemWeight = input.nextInt(); // Læser bruger input for "weight" som skal opdateres
-//                        input.nextLine();
-//                        System.out.println("Enter the new description of the item: ");
-//                        String itemDescription = input.nextLine(); // Læser bruger input for "description" som skal opdateres
-//                        System.out.println("Enter the new effect of the item: ");
-//                        int itemEffect = input.nextInt(); // Læser bruger input for "effect" som skal opdateres
-//                        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
-//                        String updated = repository.updateItem(item); // Tilføjer den opdateret item til database
-//                        System.out.println(updated);
                     }
                     case 4 -> {
                         System.out.println("You have chosen to delete an item.");
-                        String deleted = useCase.deleteItem();
+                        System.out.println("Enter the id of the item to delete");
+                        int id = input.nextInt(); // Læser bruger input for "id" som skal slettes
+                        String deleted = useCase.deleteItem(id);
                         System.out.println(deleted);
                     }
                     case 5 -> {
                         System.out.println("You have chosen to create a new inventory.");
-//                        System.out.println("Enter new user id");
-//                        int id = input.nextInt(); // Læser bruger input for brugerid til ny inventory
-                        int inventoryId = useCase.createNewInventory(); //Opretter ny inventory i database
+                        System.out.println("Enter new inventory id");
+                        int id = input.nextInt(); // Læser bruger input for brugerid til ny inventory
+                        int inventoryId = useCase.createNewInventory(id); //Opretter ny inventory i database
                         String initiated = useCase.initiateInventory(inventoryId);// Initialisere inventory med det nye brugerid
                         System.out.println(initiated);
                     }
@@ -129,15 +129,15 @@ public class Main {
                         }
                         else {
                             useCase.initiateInventory(id);
-                            useCase.showAllItems();
+//                            useCase.showAllItems();
 // Kan den returnere null????
-//                            for (Item item : useCase.inventory.getItems()) { // Viser alle items i det valgte inventory
-//                                System.out.println(item);
-//                            }
-//                            System.out.println("\nSlots used: " + useCase.inventory.getSlotCurrent() + // Viser nuværende slots og vægt i inventory
-//                                    " out of " + useCase.inventory.getSlotCurrentMax() +
-//                                    "\n \nCurrent weight: " + useCase.inventory.getWeightCurrent() +
-//                                    " out of " + useCase.inventory.getWeightMax() + "\n");
+                            for (Item item : useCase.inventory.getItems()) { // Viser alle items i det valgte inventory
+                                System.out.println(item);
+                            }
+                            System.out.println("\nSlots used: " + useCase.inventory.getSlotCurrent() + // Viser nuværende slots og vægt i inventory
+                                    " out of " + useCase.inventory.getSlotCurrentMax() +
+                                    "\n \nCurrent weight: " + useCase.inventory.getWeightCurrent() +
+                                    " out of " + useCase.inventory.getWeightMax() + "\n");
                         }
                     }
                     case 7 -> {
@@ -146,15 +146,31 @@ public class Main {
                         int itemId = input.nextInt(); // læser bruger input for "id" af item som skal tilføjes til inventory
                         String addToInventory = useCase.addItemToInventory(useCase.inventory.getId(), itemId); // Tilføjer den valgte item til inventory !=!=!=!Note!=!=!=! Hvad betyder a2i?
                         System.out.println(addToInventory);
-                        System.out.println(useCase.showAllItems());
-//                        System.out.println("The following items are now in your inventory:\n");
-//                        for (Item item : useCase.inventory.getItems()) { // Viser alle items i inventory !=!=!=!=!=!Note=!=!=!!=!= Skal måske fjernes eller ændres?
-//                            System.out.println(item.getName());
-//                        }
-//                        System.out.println("\nSlots used: " + useCase.inventory.getSlotCurrent() + // Viser nuværende slots og vægt i inventory ^^^^
-//                                " out of " + useCase.inventory.getSlotCurrentMax() +
-//                                "\n \nCurrent weight: " + useCase.inventory.getWeightCurrent() +
-//                                " out of " + useCase.inventory.getWeightMax() + "\n");
+                        Map<Item, Integer> consumables = useCase.showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
+                        List<Item> nonConsumableItems = useCase.showArmorAndWeapons(); // viser armor and weapons i inventory
+                        System.out.println("Armor and weapons in inventory: ");
+                        System.out.println("Name------------Type------------Description----------Effect");
+                        for (Item item : nonConsumableItems) {
+                            System.out.printf("%-15s %-15s %-20s %-15d%n",
+                                    item.getName(),
+                                    item.getType(),
+                                    item.getDescription(),
+                                    item.getEffect());
+                            //System.out.println(item);
+                        }
+                        System.out.println("\nConsumables: ");
+                        System.out.println("Name------------Type------------Description----------Effect");
+                        for (Map.Entry<Item, Integer> entry : consumables.entrySet()) {
+                            System.out.printf("%-15s %-15s %-20s %-15d%n",
+                                    entry.getKey().getName(),
+                                    entry.getKey().getType(),
+                                    entry.getKey().getDescription(),
+                                    entry.getValue());
+                            //System.out.println((entry.getValue()) + " of " + entry.getKey());
+                        }
+                        System.out.println("\n" + useCase.inventory.getSlotCurrent() + " slots are used out of " + useCase.inventory.getSlotCurrentMax());
+                        System.out.println("Current weight is " + useCase.inventory.getWeightCurrent() + "\n");
+
                     }
                     case 8 -> {
                         System.out.println("You have chosen to remove and item from your inventory.");
@@ -163,35 +179,35 @@ public class Main {
                         String removeFromInventory = useCase.removeItemFromInventory(useCase.inventory.getId(), itemId); // Fjerner item fra inventory
                         System.out.println(removeFromInventory);
                     }
+
                     case 9 -> {
                         System.out.println("You have chosen to display all items in your inventory.");
-                        useCase.showAllItems();
 
+                        Map<Item, Integer> consumables = useCase.showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
+                        List<Item> nonConsumableItems = useCase.showArmorAndWeapons(); // viser armor and weapons i inventory
+                        System.out.println("Armor and weapons in inventory: ");
+                        System.out.println("Name------------Type------------Description----------Effect");
+                        for (Item item : nonConsumableItems) {
+                            System.out.printf("%-15s %-15s %-20s %-15d%n",
+                                    item.getName(),
+                                    item.getType(),
+                                    item.getDescription(),
+                                    item.getEffect());
+                            //System.out.println(item);
                         }
-
-//                        Map<Item, Integer> consumables = useCase.showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
-//                        List <Item> nonConsumableItems = useCase.showArmorAndWeapons(); // viser armor and weapons i inventory
-//                        System.out.println("Armor and weapons in inventory: ");
-//                        for (Item item : nonConsumableItems) {
-//                            System.out.printf("%-15s %-15s %-30s %-10d%n",
-//                                    item.getName(),
-//                                    item.getType(),
-//                                    item.getDescription(),
-//                                    item.getEffect());
-//                            //System.out.println(item);
-//                        }
-//                        System.out.println("\nConsumables: ");
-//                        for (Map.Entry<Item, Integer> entry : consumables.entrySet()) {
-//                            System.out.printf("%-15s %-15s %-30s %-10d%n",
-//                                    entry.getKey().getName(),
-//                                    entry.getKey().getType(),
-//                                    entry.getKey().getDescription(),
-//                                    entry.getValue());
-//                            //System.out.println((entry.getValue()) + " of " + entry.getKey());
-//                        }
-//                        System.out.println("\n" + useCase.inventory.getSlotCurrent() + " slots are used out of " + useCase.inventory.getSlotCurrentMax());
-//                        System.out.println("Current weight is " + useCase.inventory.getWeightCurrent() + "\n");
-//  Hertil...                  }
+                        System.out.println("\nConsumables: ");
+                        System.out.println("Name------------Type------------Description----------Effect");
+                        for (Map.Entry<Item, Integer> entry : consumables.entrySet()) {
+                            System.out.printf("%-15s %-15s %-20s %-15d%n",
+                                    entry.getKey().getName(),
+                                    entry.getKey().getType(),
+                                    entry.getKey().getDescription(),
+                                    entry.getValue());
+                            //System.out.println((entry.getValue()) + " of " + entry.getKey());
+                        }
+                        System.out.println("\n" + useCase.inventory.getSlotCurrent() + " slots are used out of " + useCase.inventory.getSlotCurrentMax());
+                        System.out.println("Current weight is " + useCase.inventory.getWeightCurrent() + "\n");
+                    }
                     case 10 -> {
                         System.out.println("You have chosen to expand your inventory capacity.");
                         System.out.println("Updating inventory size...");
@@ -203,7 +219,7 @@ public class Main {
                         String exported = useCase.exportInventory(); // Expoterer inventory til en tekstfil
                         System.out.println(exported);
                     }
-                    case 12 -> { // Case til at søge basseret på vægt
+                    case 12 -> { // Case til at søge baseret på vægt
                         System.out.println("You have chosen to sort items by weight.");
                         System.out.println("Press 1 to sort from highest weight to lowest\nPress 2 to sort from lowest weight to highest");
                         int searchType = input.nextInt();

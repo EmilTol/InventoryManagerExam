@@ -43,59 +43,23 @@ public class UseCase {
         return null;
     }
 
-    public String createNewItem(){
-        System.out.println("Enter item id");
-        int id = input.nextInt(); // Læser bruger input for "id" til et nyt item
-        input.nextLine();
-        System.out.println("Enter item name");
-        String name = input.nextLine(); // Læser bruger input for "name" til et nyt item
-        System.out.println("Enter item type");
-        String type = input.nextLine(); // Læser bruger input for "type" til et nyt item
-        System.out.println("Enter item weight");
-        int itemWeight = input.nextInt(); // Læser bruger input for "weight" til et nyt item
-        System.out.println("Enter item description");
-        input.nextLine();
-        String itemDescription = input.nextLine(); // Læser bruger input for "description" til et nyt item
-        System.out.println("Enter item effect");
-        int itemEffect = input.nextInt(); // Læser bruger input for "effect" til et nyt item
-        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
+    public String createNewItem(Item item) {
         String answer = repository.addItem(item);// Tilføjer det nye item objekt til databasen
-                return answer;
+        return answer;
     }
-    public String deleteItem(){
-        System.out.println("Enter the id of the item to delete");
-        int id = input.nextInt(); // Læser bruger input for "id" som skal slettes
+    public String deleteItem(int id){
         String deleted = repository.deleteItem(id); // Sletter item fra database
         return deleted;
     }
-    public void getAllItems() {
+    public List <Item> getAllItems() {
         List<Item> items1 = repository.getAllItems(); // Henter alle items fra databasen
-        for (Item item : items1) {
-            System.out.println(item);
-        }
+        return items1;
     }
-    public String updateItem(){
-        System.out.println("Enter the id of the item you want to update: ");
-        int id = input.nextInt(); // Læser bruger input for "id" som skal opdateres
-        input.nextLine();
-        System.out.println("Enter the name of the item: ");
-        String name = input.nextLine(); // Læser bruger input for "name" som skal opdateres
-        System.out.println("enter the new type of the item: ");
-        String type = input.nextLine(); // Læser bruger input for "type" som skal opdateres
-        System.out.println("Enter the new weight of the item: ");
-        int itemWeight = input.nextInt(); // Læser bruger input for "weight" som skal opdateres
-        input.nextLine();
-        System.out.println("Enter the new description of the item: ");
-        String itemDescription = input.nextLine(); // Læser bruger input for "description" som skal opdateres
-        System.out.println("Enter the new effect of the item: ");
-        int itemEffect = input.nextInt(); // Læser bruger input for "effect" som skal opdateres
-        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
+    public String updateItem(Item item) {
         String updated = repository.updateItem(item); // Tilføjer den opdateret item til database
-        return(updated);
+        return updated;
     }
-    public int createNewInventory(){
-        System.out.println("Enter new user id");
-        int id = input.nextInt(); // Læser bruger input for brugerid til ny inventory
+    public int createNewInventory(int id){
         int inventoryId = repository.createNewInventory(id); //Opretter ny inventory i database
         return inventoryId;
     }
@@ -350,33 +314,9 @@ public class UseCase {
         }
         return armorWeapons;
     }
-    public String showAllItems(){
-        Map<Item, Integer> consumables = showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
-                        List <Item> nonConsumableItems = showArmorAndWeapons(); // viser armor and weapons i inventory
-
-                        System.out.println("Armor and weapons in inventory: ");
-                        System.out.println("Name------------Type------------Description----------Effect");
-                        for (Item item : nonConsumableItems) {
-                            System.out.printf("%-15s %-15s %-20s %-15d%n",
-                                    item.getName(),
-                                    item.getType(),
-                                    item.getDescription(),
-                                    item.getEffect());
-                            //System.out.println(item);
-                        }
-                        System.out.println("\nConsumables: ");
-                        System.out.println("Name------------Type------------Description----------Effect");
-                        for (Map.Entry<Item, Integer> entry : consumables.entrySet()) {
-                            System.out.printf("%-15s %-15s %-20s %-15d%n",
-                                    entry.getKey().getName(),
-                                    entry.getKey().getType(),
-                                    entry.getKey().getDescription(),
-                                    entry.getValue());
-                            //System.out.println((entry.getValue()) + " of " + entry.getKey());
-                        }
-                        System.out.println("\n" + inventory.getSlotCurrent() + " slots are used out of " + inventory.getSlotCurrentMax());
-                        System.out.println("Current weight is " + inventory.getWeightCurrent() + "\n");
-
-        return "OK";
-    }
+//    public String showAllItems(){
+//        Map<Item, Integer> consumables = showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
+//        List <Item> nonConsumableItems = showArmorAndWeapons(); // viser armor and weapons i inventory
+//        return "OK";
+//    }
 }
