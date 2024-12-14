@@ -317,8 +317,8 @@ public class UseCase {
         }
         return armorWeapons;
     }
-    public List<Item> showAllItems(){
-        items = inventory.getItems();
-        return items;
-    }
+//    public List<Item> showAllItems(){
+//        items = inventory.getItems();
+//        return items;
+//    }
 }
