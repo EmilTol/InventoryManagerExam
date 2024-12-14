@@ -37,19 +37,19 @@ public class Item {
         return description;
     }
     @Override
-    public String toString() {
+    public String toString() { //Overskriver toString, så den udskriver et Item som vi har oprettet det
         return String.format("id: %d, name: %s, type: %s, weight: %d, description: %s, effect: %d", +
                 id, name, type, weight, description, effect);
     }
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) { //Overskriver equals metoden, så den virker med vores Item
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
         return id == item.id;
     }
 
-    @Override
+    @Override  //Overskriver hashcode for at equals-metoden fungerer korrekt
     public int hashCode() {
         return Objects.hash(id, name, type, weight, description, effect);
     }

@@ -7,11 +7,11 @@ public class DatabaseRepository {
 
     public DatabaseRepository() {
     }
-    //Create
+    //Opretter item i databasen
     public String addItem(Item item) {
         String sql = "INSERT INTO item (iditem, name, type, weight, description, effect) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getconnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) { //Sender forberedt statement
             preparedStatement.setInt(1, item.getId());
             preparedStatement.setString(2, item.getName());
             preparedStatement.setString(3, item.getType());
@@ -19,7 +19,7 @@ public class DatabaseRepository {
             preparedStatement.setString(5, item.getDescription());
             preparedStatement.setInt(6, item.getEffect());
 
-            int rowsInserted = preparedStatement.executeUpdate();
+            int rowsInserted = preparedStatement.executeUpdate(); //Hvis der bliver indsat rækker i databasen, returnerer den item added
             if (rowsInserted > 0) {
                 return ("New item added");
             } else {
@@ -35,7 +35,7 @@ public class DatabaseRepository {
         return null;
     }
 
-        //read
+        //Får en liste over alle items i databasen
     public List<Item> getAllItems() {
         List<Item> items = new ArrayList<>();
         String sql = "SELECT * FROM item";
@@ -51,14 +51,14 @@ public class DatabaseRepository {
                 int effect = resultSet.getInt("effect");
 
                 items.add(new Item(id, name, type, weight, description, effect));
-            }
+            } //Tilføjer til listen med items og til sidst returnerer den
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return items;
     }
 
-    //update
+    //Opdater items
     public String updateItem(Item item) {
         String sql = "UPDATE item SET name = ?, type = ?, weight = ?, description = ?, effect = ? WHERE iditem = ?";
 
@@ -71,7 +71,7 @@ public class DatabaseRepository {
             preparedStatement.setString(4, item.getDescription());
             preparedStatement.setInt(5, item.getEffect());
             preparedStatement.setInt(6, item.getId());
-
+//Hvis rækker bliver opdateret så returnerer den at item er opdateret
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows > 0) {
                 System.out.println("Item updated");
@@ -82,7 +82,7 @@ public class DatabaseRepository {
         return ("Item updated");
     }
 
-    //    //delete
+       //Sletter et item fra databasen
     public String deleteItem(int id) {
         String sql = "DELETE FROM item WHERE iditem = ?";
 
@@ -98,7 +98,7 @@ public class DatabaseRepository {
         }
         return ("Item deleted");
     }
-
+//Opretter nyt inventory og generer en primary key som den returnerer
     public int createNewInventory(int idUser){
         String sql = "INSERT INTO inventory (iduser) VALUES (?);";
         try (Connection connection = DatabaseConnection.getconnection();
@@ -130,7 +130,7 @@ public class DatabaseRepository {
         }
         return 0;
     }
-
+//Initierer et inventory
     public List <Item> initiateInventory(int inventoryId) {
         List<Item> items = new ArrayList<>();
         String sql = "SELECT inventory.idinventory, item.*\n" +
@@ -150,7 +150,7 @@ public class DatabaseRepository {
                 int weight = resultSet.getInt("weight");
                 String description = resultSet.getString("description");
                 int effect = resultSet.getInt("effect");
-
+//Opretter items efter deres type (underklasser af items)
                 if (type.equals("Armor")) {
                     Item item = new Armor(iditem, name, type, weight, description, effect);
                     items.add(item);
@@ -163,7 +163,7 @@ public class DatabaseRepository {
                     Item item = new Consumable(iditem, name, type, weight, description, effect);
                     items.add(item);
                 }
-
+//Kunne måske blive brugt, hvis man skulle oprette simple ting i spillet
                 //items.add(new Item(iditem, name, type, weight, description, effect));
 
             }
@@ -172,7 +172,7 @@ public class DatabaseRepository {
         }
         return items;
     }
-
+//Finder hvor mange slots brugeren maksimalt kan udnytte
     public int initiateMaxSlots(int inventoryId) {
         String sql = "SELECT slotcurrentmax\n" +
                 "FROM inventory\n" +
@@ -191,7 +191,7 @@ public class DatabaseRepository {
         }
         return 0;
     }
-
+//Finder hvor mange slots brugeren allerede har brugt
     public int initiateSlots(int inventoryId) {
         String sql = "SELECT slotcurrent\n" +
                 "FROM inventory\n" +
@@ -210,7 +210,7 @@ public class DatabaseRepository {
         }
         return 0;
     }
-
+//Gør ens inventory større ved at sætte en ny max
     public String setSlotSize(int slotNewMax, int inventoryId) {
         String sql = "UPDATE inventory SET slotcurrentmax = ? WHERE idinventory = ?";
 
@@ -229,7 +229,7 @@ public class DatabaseRepository {
         }
         return "Slot size updated in database";
     }
-
+//Tilføjer ting til et inventory
     public String addItemToInventory(int fkinventory, int fkitem) {
         String sql = "INSERT INTO inventoryhasitem (fkinventory, fkitem) VALUES (?, ?)";
         try (Connection connection = DatabaseConnection.getconnection();
@@ -248,7 +248,7 @@ public class DatabaseRepository {
         }
         return null;
     }
-
+//Opdaterer databasen, så den har det seneste antal slots man har i brug
     public String setSlot(int currentSlot, int inventoryId){
         String sql = "UPDATE inventory SET slotcurrent = ? WHERE idinventory = ?";
 
@@ -266,7 +266,7 @@ public class DatabaseRepository {
         }
         return ("Slots updated");
     }
-
+//Fjerner fra inventory
     public String removeItemFromInventory(int fkinventory, int fkitem) {
         String sql = "DELETE FROM inventoryhasitem\nWHERE fkinventory = ? AND fkitem = ?\nLIMIT 1";
         try (Connection connection = DatabaseConnection.getconnection();
@@ -285,9 +285,8 @@ public class DatabaseRepository {
         }
         return null;
     }
-
+//Finder en item blandt alle items'ne og returnerer den
     public Item getOneItem(int id) {
-
         String sql = "SELECT * FROM item WHERE iditem = ?";
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement statement = connection.prepareStatement(sql)){

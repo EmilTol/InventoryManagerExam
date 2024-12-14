@@ -127,6 +127,10 @@ public class Main {
                     }
                     case 7 -> {
                         System.out.println("You have chosen to add an item to your inventory.");
+                        List<Item> items1 = useCase.getAllItems();// Henter alle items fra databasen
+                        for (Item item : items1) {
+                            System.out.println(item);
+                        }
                         System.out.println("Enter the id of the item to add: ");
                         int itemId = input.nextInt(); // læser bruger input for "id" af item som skal tilføjes til inventory
                         String addToInventory = useCase.addItemToInventory(useCase.inventory.getId(), itemId); // Tilføjer den valgte item til inventory !=!=!=!Note!=!=!=! Hvad betyder a2i?
