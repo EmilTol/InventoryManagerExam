@@ -32,8 +32,8 @@ public class UseCase {
 
            inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
 
-            System.out.println(inventory.getId());
-            System.out.println("Inventory initiated");
+//            System.out.println(inventory.getId());
+//            System.out.println("Inventory initiated");
         return "Inventory initiated";
     }
         return null;

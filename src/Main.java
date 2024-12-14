@@ -111,14 +111,15 @@ public class Main {
                         System.out.println(initiated);
                     }
                     case 6 -> {
-                        System.out.println("You have chosen to select and display an inventory.");
-                        System.out.println("Enter the id of the inventory to display");
+                        System.out.println("You have chosen to select an inventory.");
+                        System.out.println("Enter the id of the inventory to use");
                         int id = input.nextInt(); // Læser bruger input "id" for den inventory som skal vises
                         if (useCase.initiateInventory(id) == null) { // Tjekker om inventory findes og initialisere det
                             System.out.println("No inventory found");
                         }
                         else {
-                            useCase.initiateInventory(id);
+                            String initiated = useCase.initiateInventory(id);
+                            System.out.println(initiated + " inventory " + id);
                             System.out.println("\nSlots used: " + useCase.inventory.getSlotCurrent() + // Viser nuværende slots og vægt i inventory
                                     " out of " + useCase.inventory.getSlotCurrentMax() +
                                     "\n \nCurrent weight: " + useCase.inventory.getWeightCurrent() +
