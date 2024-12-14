@@ -9,18 +9,10 @@ public class Main {
     public static void main(String[] args) {
         UseCase useCase = new UseCase();
         Scanner input = new Scanner(System.in);
-        DatabaseRepository repository = new DatabaseRepository();
-//        List <Item> items = new ArrayList<>();
-    // Opretter en ny Databaserepository instans
-//        List <Item> items = new ArrayList<>(); // Opretter en tom liste af Item objekter
-//        Scanner input = new Scanner(System.in);
-//        Inventory inventory = new Inventory(0,0, 0,0, items); // Opretter en ny inventory instans med "tomme" værdier
-
-
+        DatabaseRepository repository = new DatabaseRepository(); // Opretter en ny Databaserepository instans
 
         System.out.println("---Initializing Inventory---");
         useCase.initiateInventory(1);// Initialisere inventory med id 1
-//        useCase.showAllItems();
 
 //        System.out.println("Please choose the id of the inventory you want to use");
 //        List<Integer> inventoryIds = repository.getAllInventoryIds();
@@ -127,7 +119,6 @@ public class Main {
                         }
                         else {
                             useCase.initiateInventory(id);
-//                            useCase.showAllItems();
                             System.out.println("\nSlots used: " + useCase.inventory.getSlotCurrent() + // Viser nuværende slots og vægt i inventory
                                     " out of " + useCase.inventory.getSlotCurrentMax() +
                                     "\n \nCurrent weight: " + useCase.inventory.getWeightCurrent() +
@@ -150,7 +141,6 @@ public class Main {
                                     item.getType(),
                                     item.getDescription(),
                                     item.getEffect());
-                            //System.out.println(item);
                         }
                         System.out.println("\nConsumables: ");
                         System.out.println("Name------------Type------------Description----------Effect");
@@ -160,7 +150,6 @@ public class Main {
                                     entry.getKey().getType(),
                                     entry.getKey().getDescription(),
                                     entry.getValue());
-                            //System.out.println((entry.getValue()) + " of " + entry.getKey());
                         }
                         System.out.println("\n" + useCase.inventory.getSlotCurrent() + " slots are used out of " + useCase.inventory.getSlotCurrentMax());
                         System.out.println("Current weight is " + useCase.inventory.getWeightCurrent() + "\n");
@@ -187,7 +176,6 @@ public class Main {
                                     item.getType(),
                                     item.getDescription(),
                                     item.getEffect());
-                            //System.out.println(item);
                         }
                         System.out.println("\nConsumables: ");
                         System.out.println("Name------------Type------------Description----------Effect");
@@ -197,7 +185,6 @@ public class Main {
                                     entry.getKey().getType(),
                                     entry.getKey().getDescription(),
                                     entry.getValue());
-                            //System.out.println((entry.getValue()) + " of " + entry.getKey());
                         }
                         System.out.println("\n" + useCase.inventory.getSlotCurrent() + " slots are used out of " + useCase.inventory.getSlotCurrentMax());
                         System.out.println("Current weight is " + useCase.inventory.getWeightCurrent() + "\n");
@@ -257,7 +244,7 @@ public class Main {
                         System.out.println("Invalid choice try again");
                     }
                 }
-            } catch (InputMismatchException ime) { // Håndtere forkerte input mismatchs
+            } catch (InputMismatchException ime) { // Håndterer forkerte input mismatchs
                 System.out.println("Invalid choice try again ----" + ime);
                 input.nextLine(); // Rydder scanner
             }

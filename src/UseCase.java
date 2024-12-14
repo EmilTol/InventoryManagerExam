@@ -22,22 +22,18 @@ public class UseCase {
         int slotMax = repository.initiateMaxSlots(id);
         items = repository.initiateInventory(id);
 
-//        System.out.println(items.size());
         if (items.isEmpty()) {
             inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
         } else {
         for (Item item : items) {
             weight += item.getWeight();
-//            System.out.println(item.toString());
         }
             inventory.setSlotCurrent(slot);
             inventory.setWeightCurrent(weight);
             inventory.setSlotCurrentMax(slotMax);
             inventory.setItems(items);
-//            for (Item item : items) {
-//                System.out.println(item.toString());
-//            }
-        inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
+
+           inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
 
             System.out.println(inventory.getId());
             System.out.println("Inventory initiated");
@@ -73,7 +69,6 @@ public class UseCase {
         System.out.println(item.getType());
         if (checkWeight(item, inventory.getWeightCurrent(), inventory.getWeightMax())) {
             if (checkItemStack(items, item)) { // Kalder CheckItemStack korrekt
-//                System.out.println(item.getName());
                 if (checkAvailableSlotConsumable(inventory.getSlotCurrent(), inventory.getSlotCurrentMax())) {
                     String added = repository.addItemToInventory(invId, itemId);
                     newWeight = (inventory.getWeightCurrent() + item.getWeight());
@@ -108,7 +103,6 @@ public class UseCase {
         Item item = repository.getOneItem(itemId);
         String removed = repository.removeItemFromInventory(invId, itemId);
         if (removed != null) {
-            //System.out.println(item + " to be removed");
             for (int i = 0; i < items.size(); i++) {
                 Item obj = items.get(i);
                 if (obj.getId() == itemId) {
@@ -119,14 +113,9 @@ public class UseCase {
                     }
                     inventory.setWeightCurrent(inventory.getWeightCurrent() - item.getWeight());
                     String slotSet = repository.setSlot(inventory.getSlotCurrent(), invId);
-                    //System.out.println("Slot set: " + slotSet);
-                    return "Item removed from inventory";
+                    return "Item removed from inventory.";
                 }
             }
-
-//            items.remove(items.indexOf(item));
-//            System.out.println(item.getName());
-
         } else {
             return "Item cannot be removed";
         }
@@ -134,21 +123,16 @@ public class UseCase {
     }
 
     public boolean checkItemStack(List<Item> items, Item item) {
-        for (int i = 0; i < items.size(); i++) {
-            Item obj = items.get(i);
-            if (obj.getId() == item.getId()) {
-//        for (Item currentItem : items) {
-//            System.out.println("Checking item: " + currentItem + " against " + item);
-//            if (currentItem.equals(item)) { // Sammenlign objekter
-//                System.out.println("Success: Item found in stack - " + currentItem.getName());
-//                System.out.println("Success");
+        for (Item currentItem : items) {
+            System.out.println("Checking item: " + currentItem + " against " + item);
+            if (currentItem.equals(item)) { // Sammenlign objekter
                 if (item.getType().equals("Consumable")) {
-                    //slotCurrent--;
+                    System.out.println("Success: Item found in stack: " + currentItem.getName());
                     return true;
                 }
             }
         }
-        System.out.println("Item not found in stack.");
+        System.out.println("Item doesn't stack.");
         return false;
     }
 
@@ -182,7 +166,6 @@ public class UseCase {
         if (gold > 9) {
             for (int i = 0; i <= 10; i++) {
                 removeItemFromInventory(invId, 1);
-
             }
             return true;
         }
@@ -258,7 +241,6 @@ public class UseCase {
         System.out.println("Enter type to search for: Weapon, Armor or Consumable");
         String type = input.nextLine();
         for (Item item : items) {
-            //System.out.println(item.getType().toLowerCase());
             if (item.getType().toLowerCase().equals(type.toLowerCase())) {
                 temp.add(item);
             }
@@ -301,16 +283,9 @@ public class UseCase {
     }
 
     public List<Item> showArmorAndWeapons() {
-//        System.out.println(inventory.getSlotCurrent());
         items = inventory.getItems();
-//        for (Item item : items) {
-//            System.out.println(item.toString());
-//        }
         ArrayList<Item> armorWeapons = new ArrayList<>();
-//        inventory.getItems() = items;
-
         for (Item item : items) {
-//            System.out.println(item);
             if (item.getType().equals("Weapon") || item.getType().equals("Armor")) {
                 armorWeapons.add(item);
             }

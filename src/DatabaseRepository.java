@@ -7,7 +7,7 @@ public class DatabaseRepository {
 
     public DatabaseRepository() {
     }
-
+    //Create
     public String addItem(Item item) {
         String sql = "INSERT INTO item (iditem, name, type, weight, description, effect) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getconnection();
@@ -35,7 +35,7 @@ public class DatabaseRepository {
         return null;
     }
 
-    //    //read
+        //read
     public List<Item> getAllItems() {
         List<Item> items = new ArrayList<>();
         String sql = "SELECT * FROM item";
@@ -164,7 +164,7 @@ public class DatabaseRepository {
                     items.add(item);
                 }
 
-                //items.add(new Item(iditemtest, name, type, weight, description, effect));
+                //items.add(new Item(iditem, name, type, weight, description, effect));
 
             }
         } catch (SQLException e) {
@@ -255,11 +255,11 @@ public class DatabaseRepository {
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setInt(1, (currentSlot));
+            preparedStatement.setInt(1, currentSlot);
             preparedStatement.setInt(2, inventoryId);
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows > 0) {
-                //System.out.println("Slots updated");
+                return "Slots updated";
             }
         } catch (SQLException e) {
             e.printStackTrace();
