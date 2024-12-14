@@ -69,8 +69,7 @@ public class Main {
                     }
                     case 2 -> {
                         System.out.println("You have chosen to view all items in the list");
-                        useCase.getAllItems();
-                        List<Item> items1 = repository.getAllItems(); // Henter alle items fra databasen
+                        List<Item> items1 = useCase.getAllItems();// Henter alle items fra databasen
                         for (Item item : items1) {
                             System.out.println(item);
                         }
@@ -104,7 +103,7 @@ public class Main {
                     }
                     case 5 -> {
                         System.out.println("You have chosen to create a new inventory.");
-                        System.out.println("Enter new inventory id");
+                        System.out.println("Enter user id for new inventory");
                         int id = input.nextInt(); // Læser bruger input for brugerid til ny inventory
                         int inventoryId = useCase.createNewInventory(id); //Opretter ny inventory i database
                         String initiated = useCase.initiateInventory(inventoryId);// Initialisere inventory med det nye brugerid

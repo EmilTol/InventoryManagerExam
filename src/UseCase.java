@@ -21,6 +21,7 @@ public class UseCase {
 
         if (items.isEmpty()) {
             inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
+            return "New inventory initiated";
         } else {
         for (Item item : items) {
             weight += item.getWeight();
@@ -36,7 +37,7 @@ public class UseCase {
 //            System.out.println("Inventory initiated");
         return "Inventory initiated";
     }
-        return null;
+        //return null;
     }
 
     public String createNewItem(Item item) {
