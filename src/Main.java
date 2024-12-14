@@ -221,14 +221,19 @@ public class Main {
                         System.out.println("You have chosen to search for an item.");
                         System.out.println("Press 1 to search by item type\nPress 2 to search by name");
                         int searchType = input.nextInt();
+                        input.nextLine();
                         if (searchType == 1) {
-                            List<Item> searchByType = useCase.searchByType(); // Søger og viser items efter type
+                            System.out.println("Enter type to search for: Weapon, Armor or Consumable");
+                            String type = input.nextLine();
+                            List<Item> searchByType = useCase.searchByType(type); // Søger og viser items efter type
                             for (Item searchByTypes : searchByType) {
                                 System.out.println(searchByTypes);
                             }
                         }
                         if (searchType == 2) {
-                            List <Item> searchByName = useCase.searchByName(); // Søger og viser items efter navn
+                            System.out.println("Enter name or part of name to search for: ");
+                            String name = input.nextLine();
+                            List <Item> searchByName = useCase.searchByName(name); // Søger og viser items efter navn
                             for (Item searchByNames : searchByName) {
                                 System.out.println(searchByNames);
                             }

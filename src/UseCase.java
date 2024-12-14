@@ -236,10 +236,8 @@ public class UseCase {
         }
     }
 
-    public List<Item> searchByType() {
+    public List<Item> searchByType(String type) {
         List<Item> temp = new ArrayList<>();
-        System.out.println("Enter type to search for: Weapon, Armor or Consumable");
-        String type = input.nextLine();
         for (Item item : items) {
             if (item.getType().toLowerCase().equals(type.toLowerCase())) {
                 temp.add(item);
@@ -251,10 +249,8 @@ public class UseCase {
         return temp;
     }
 
-    public List<Item> searchByName() {
+    public List<Item> searchByName(String name) {
         List<Item> temp = new ArrayList<>();
-        System.out.println("Enter name or part of name to search for: ");
-        String name = input.nextLine();
         for (Item item : items) {
             if (item.getName().toLowerCase().contains(name.toLowerCase())) {
                 temp.add(item);
