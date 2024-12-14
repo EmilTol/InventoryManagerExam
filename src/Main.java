@@ -106,7 +106,7 @@ public class Main {
                         System.out.println("Enter user id for new inventory");
                         int id = input.nextInt(); // Læser bruger input for brugerid til ny inventory
                         int inventoryId = useCase.createNewInventory(id); //Opretter ny inventory i database
-                        String initiated = useCase.initiateInventory(inventoryId);// Initialisere inventory med det nye brugerid
+                        String initiated = useCase.initiateInventory(inventoryId);// Initialiserer det nye inventory
                         System.out.println(initiated);
                     }
                     case 6 -> {
