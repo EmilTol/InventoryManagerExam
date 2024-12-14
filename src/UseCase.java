@@ -20,25 +20,27 @@ public class UseCase {
         int weight = 0;
         int slot = repository.initiateSlots(id);
         int slotMax = repository.initiateMaxSlots(id);
-        List<Item> items = repository.initiateInventory(id);
-        //System.out.println(items.size());
+        items = repository.initiateInventory(id);
+
+//        System.out.println(items.size());
         if (items.isEmpty()) {
             inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
         } else {
         for (Item item : items) {
             weight += item.getWeight();
-            //System.out.println(item.toString());
+//            System.out.println(item.toString());
         }
             inventory.setSlotCurrent(slot);
             inventory.setWeightCurrent(weight);
             inventory.setSlotCurrentMax(slotMax);
             inventory.setItems(items);
-            for (Item item : items) {
-                System.out.println(item);
-            }
+//            for (Item item : items) {
+//                System.out.println(item.toString());
+//            }
         inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
 
-//            System.out.println(inventory.getId());
+            System.out.println(inventory.getId());
+            System.out.println("Inventory initiated");
         return "Inventory initiated";
     }
         return null;
