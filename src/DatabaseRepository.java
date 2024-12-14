@@ -144,7 +144,7 @@ public class DatabaseRepository {
             preparedStatement.setInt(1, inventoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int iditemtest = resultSet.getInt("iditem");
+                int iditem = resultSet.getInt("iditem");
                 String type = resultSet.getString("type");
                 String name = resultSet.getString("name");
                 int weight = resultSet.getInt("weight");
@@ -152,16 +152,16 @@ public class DatabaseRepository {
                 int effect = resultSet.getInt("effect");
 
                 if (type.equals("Armor")) {
-                    Item item = new Armor(iditemtest, name, type, weight, description, effect);
-                    items.add(new Armor(iditemtest, name, type, weight, description, effect));
+                    Item item = new Armor(iditem, name, type, weight, description, effect);
+                    items.add(item);
                 }
                 else if (type.equals("Weapon")){
-                    Item item = new Weapon(iditemtest, name, type, weight, description, effect);
-                    items.add(new Weapon(iditemtest, name, type, weight, description, effect));
+                    Item item = new Weapon(iditem, name, type, weight, description, effect);
+                    items.add(item);
                 }
                 else if (type.equals("Consumable")) {
-                    Item item = new Consumable(iditemtest, name, type, weight, description, effect);
-                    items.add(new Consumable(iditemtest, name, type, weight, description, effect));
+                    Item item = new Consumable(iditem, name, type, weight, description, effect);
+                    items.add(item);
                 }
 
                 //items.add(new Item(iditemtest, name, type, weight, description, effect));

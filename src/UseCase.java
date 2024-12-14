@@ -13,33 +13,34 @@ public class UseCase {
     DatabaseRepository repository = new DatabaseRepository();
     List <Item> items = new ArrayList<>(); // Opretter en tom liste af Item objekter
     Scanner input = new Scanner(System.in);
-    Inventory inventory = new Inventory(0,0, 0,0, items); // Opretter en ny inventory instans med "tomme" værdier
+    Inventory inventory = new Inventory(0,0, 0,0, items);// Opretter en ny inventory instans med "tomme" værdier
 
     public String initiateInventory(int id) {
         int inventoryId = id;
         int weight = 0;
         int slot = repository.initiateSlots(id);
         int slotMax = repository.initiateMaxSlots(id);
-        List<Item> items = repository.initiateInventory(inventoryId);
+        List<Item> items = repository.initiateInventory(id);
         //System.out.println(items.size());
         if (items.isEmpty()) {
             inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
         } else {
-            for (Item item : items) {
-                weight += item.getWeight();
-                //System.out.println(item.toString());
-            }
+        for (Item item : items) {
+            weight += item.getWeight();
+            //System.out.println(item.toString());
+        }
             inventory.setSlotCurrent(slot);
             inventory.setWeightCurrent(weight);
             inventory.setSlotCurrentMax(slotMax);
             inventory.setItems(items);
-//            for (Item item : items) {
-//                System.out.println(item);
-//            }
-            inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
+
 //            System.out.println(inventory.getId());
-            return "Inventory initiated";
-        }
+        return "Inventory initiated";
+    }
         return null;
     }
 
@@ -304,7 +305,7 @@ public class UseCase {
 //            System.out.println(item.toString());
 //        }
         ArrayList<Item> armorWeapons = new ArrayList<>();
-        inventory.items = items;
+//        inventory.getItems() = items;
 
         for (Item item : items) {
 //            System.out.println(item);
@@ -314,9 +315,8 @@ public class UseCase {
         }
         return armorWeapons;
     }
-//    public String showAllItems(){
-//        Map<Item, Integer> consumables = showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
-//        List <Item> nonConsumableItems = showArmorAndWeapons(); // viser armor and weapons i inventory
-//        return "OK";
-//    }
+    public List<Item> showAllItems(){
+        items = inventory.getItems();
+        return items;
+    }
 }

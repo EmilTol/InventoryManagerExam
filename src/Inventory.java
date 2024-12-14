@@ -16,7 +16,7 @@ public class Inventory {
     private final int slotMax = 192;
     private int weightCurrent;
     private final int weightMax = 50;
-    public List<Item> items;
+    private List<Item> items;
 //    Scanner input = new Scanner(System.in);
 
 

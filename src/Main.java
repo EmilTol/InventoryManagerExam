@@ -20,9 +20,7 @@ public class Main {
 
         System.out.println("---Initializing Inventory---");
         useCase.initiateInventory(1);// Initialisere inventory med id 1
-//        for (Item item : inventory.getItems()) {
-//            System.out.println(items);
-//        }
+        useCase.showAllItems();
 
 //        System.out.println("Please choose the id of the inventory you want to use");
 //        List<Integer> inventoryIds = repository.getAllInventoryIds();
@@ -129,11 +127,7 @@ public class Main {
                         }
                         else {
                             useCase.initiateInventory(id);
-//                            useCase.showAllItems();
-// Kan den returnere null????
-                            for (Item item : useCase.inventory.getItems()) { // Viser alle items i det valgte inventory
-                                System.out.println(item);
-                            }
+                            useCase.showAllItems();
                             System.out.println("\nSlots used: " + useCase.inventory.getSlotCurrent() + // Viser nuværende slots og vægt i inventory
                                     " out of " + useCase.inventory.getSlotCurrentMax() +
                                     "\n \nCurrent weight: " + useCase.inventory.getWeightCurrent() +
