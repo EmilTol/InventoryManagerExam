@@ -4,15 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class UseCase {
     DatabaseRepository repository = new DatabaseRepository();
     List <Item> items = new ArrayList<>(); // Opretter en tom liste af Item objekter
-    Scanner input = new Scanner(System.in);
     Inventory inventory = new Inventory(0,0, 0,0, items);// Opretter en ny inventory instans med "tomme" værdier
 
     public String initiateInventory(int id) {
