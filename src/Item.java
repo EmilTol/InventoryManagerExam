@@ -33,24 +33,6 @@ public class Item {
         return name;
     }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-//    public void setType(String type) {
-//        this.type = type;
-//    }
-//    public void setWeight(int weight) {
-//        this.weight = weight;
-//    }
-//    public void setEffect(int effect) {
-//        this.effect = effect;
-//    }
 
     public String getDescription() {
         return description;
