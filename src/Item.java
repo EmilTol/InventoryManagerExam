@@ -1,5 +1,5 @@
 import java.util.Objects;
-
+//Superklasse
 public class Item {
     private int id;
     private String name;
@@ -7,7 +7,7 @@ public class Item {
     private String type;
     private int weight;
     private int effect;
-
+//Konstruktør
     public Item(int id, String name, String type, int weight, String description, int effect) {
         this.id = id;
         this.name = name;
@@ -32,6 +32,25 @@ public class Item {
     public String getName() {
         return name;
     }
+
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//    public void setType(String type) {
+//        this.type = type;
+//    }
+//    public void setWeight(int weight) {
+//        this.weight = weight;
+//    }
+//    public void setEffect(int effect) {
+//        this.effect = effect;
+//    }
 
     public String getDescription() {
         return description;

@@ -3,38 +3,16 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         UseCase useCase = new UseCase();
         Scanner input = new Scanner(System.in);
-        DatabaseRepository repository = new DatabaseRepository(); // Opretter en ny Databaserepository instans
+//        DatabaseRepository repository = new DatabaseRepository(); // Opretter en ny Databaserepository instans
 
         System.out.println("---Initializing Inventory---");
-        useCase.initiateInventory(1);// Initialisere inventory med id 1
+        useCase.initiateInventory(1);// Initialiserer inventory med id 1
 
-//        System.out.println("Please choose the id of the inventory you want to use");
-//        List<Integer> inventoryIds = repository.getAllInventoryIds();
-//        for (Integer id : inventoryIds)
-//            System.out.println("Inventory ID: " + id);
-
-//        boolean validInventoryId = false;
-//        while (!validInventoryId) {
-//            try {
-//                int selectedInventoryId = input.nextInt();
-//                inventory = repository.getInventoryById(selectedInventoryId);
-//                if (inventory != null) {
-//                    validInventoryId = true;
-//                    System.out.println("Initializing inventory with ID: " + selectedInventoryId);
-//                } else {
-//                    System.out.println("Invalid inventory ID, please try again");
-//                }
-//            } catch (InputMismatchException e) {
-//                System.out.println("Invalid input, Please type the number of the account ID");
-//                input.nextLine();
-//            }
-//        }
 
         while (true) {
             System.out.println("Welcome to Legend of Zel... GameCraft\nChoose your poison\n1 to forge a new item" +
@@ -133,33 +111,10 @@ public class Main {
                         }
                         System.out.println("Enter the id of the item to add: ");
                         int itemId = input.nextInt(); // læser bruger input for "id" af item som skal tilføjes til inventory
-                        String addToInventory = useCase.addItemToInventory(useCase.inventory.getId(), itemId); // Tilføjer den valgte item til inventory !=!=!=!Note!=!=!=! Hvad betyder a2i?
+                        String addToInventory = useCase.addItemToInventory(useCase.inventory.getId(), itemId); // Tilføjer den valgte item til inventory
                         System.out.println(addToInventory);
-//                        Map<Item, Integer> consumables = useCase.showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
-//                        List<Item> nonConsumableItems = useCase.showArmorAndWeapons(); // viser armor and weapons i inventory
-//                        System.out.println("Armor and weapons in inventory: ");
-//                        System.out.println("Name------------Type------------Description----------Effect");
-//                        for (Item item : nonConsumableItems) {
-//                            System.out.printf("%-15s %-15s %-20s %-15d%n",
-//                                    item.getName(),
-//                                    item.getType(),
-//                                    item.getDescription(),
-//                                    item.getEffect());
-//                        }
-//                        System.out.println("\nConsumables: ");
-//                        System.out.println("Name------------Type------------Description----------Effect");
-//                        for (Map.Entry<Item, Integer> entry : consumables.entrySet()) {
-//                            System.out.printf("%-15s %-15s %-20s %-15d%n",
-//                                    entry.getKey().getName(),
-//                                    entry.getKey().getType(),
-//                                    entry.getKey().getDescription(),
-//                                    entry.getValue());
-//                        }
-//                        System.out.println("\n" + useCase.inventory.getSlotCurrent() + " slots are used out of " + useCase.inventory.getSlotCurrentMax());
-//                        System.out.println("Current weight is " + useCase.inventory.getWeightCurrent() + "\n");
-//                        choice = 9;
-
                     }
+
                     case 8 -> {
                         System.out.println("You have chosen to remove and item from your inventory.");
                         System.out.println("Enter the id of the item to remove");
@@ -197,7 +152,7 @@ public class Main {
                     case 10 -> {
                         System.out.println("You have chosen to expand your inventory capacity.");
                         System.out.println("Updating inventory size...");
-                        String slotSize = useCase.increaseMaxSlot(useCase.inventory.getSlotCurrentMax(), useCase.inventory.getSlotMax(), useCase.inventory.getId()); // Er måske dum, men øger vi ikke maxslots?
+                        String slotSize = useCase.increaseMaxSlot(useCase.inventory.getSlotCurrentMax(), useCase.inventory.getSlotMax(), useCase.inventory.getId()); // Øger nuværende max slot
                         System.out.println(slotSize + " slots");
                     }
                     case 11 -> {
@@ -245,7 +200,7 @@ public class Main {
                         }
                     }
 
-                    case 14 -> { // Afslutter programmet ved at returnere? Ved ikke hvordan man bedst skal formulere det!?!!=!=!=!=!=
+                    case 14 -> { // Afslutter programmet
                         System.out.println("Exiting...");
                         return;
                     }

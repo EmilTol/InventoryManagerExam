@@ -2,7 +2,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -286,8 +285,4 @@ public class UseCase {
         }
         return armorWeapons;
     }
-//    public List<Item> showAllItems(){
-//        items = inventory.getItems();
-//        return items;
-//    }
 }
