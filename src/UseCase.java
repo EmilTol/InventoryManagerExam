@@ -10,7 +10,7 @@ public class UseCase {
     DatabaseRepository repository = new DatabaseRepository();
     List <Item> items = new ArrayList<>(); // Opretter en tom liste af Item objekter
     Inventory inventory = new Inventory(0,0, 0,0, items);// Opretter en ny inventory instans med "tomme" værdier
-
+//"Sætter" et inventory
     public String initiateInventory(int id) {
         int inventoryId = id;
         int weight = 0;
@@ -23,7 +23,7 @@ public class UseCase {
             return "New inventory initiated";
         } else {
         for (Item item : items) {
-            weight += item.getWeight();
+            weight += item.getWeight();//Lægger vægt sammen
         }
             inventory.setSlotCurrent(slot);
             inventory.setWeightCurrent(weight);
@@ -62,15 +62,15 @@ public class UseCase {
 
     public String addItemToInventory(int invId, int itemId) {
         int newWeight = 0;
-        Item item = repository.getOneItem(itemId);
+        Item item = repository.getOneItem(itemId);//Henter et item
         System.out.println(item.getType());
-        if (checkWeight(item, inventory.getWeightCurrent(), inventory.getWeightMax())) {
-            if (checkItemStack(items, item)) { // Kalder CheckItemStack korrekt
+        if (checkWeight(item, inventory.getWeightCurrent(), inventory.getWeightMax())) {//Kalder vægttjek
+            if (checkItemStack(items, item)) { // Kalder CheckItemStack
                 if (checkAvailableSlotConsumable(inventory.getSlotCurrent(), inventory.getSlotCurrentMax())) {
                     String added = repository.addItemToInventory(invId, itemId);
                     newWeight = (inventory.getWeightCurrent() + item.getWeight());
-                    inventory.setWeightCurrent(newWeight);
-                    items.add(item);
+                    inventory.setWeightCurrent(newWeight);//Sætter vægten
+                    items.add(item);//Tilføjer item til listen
                     System.out.println("Item added: " + item);
                     return added;
                 } else {
@@ -79,10 +79,10 @@ public class UseCase {
             } else if (checkAvailableSlot(inventory.getSlotCurrent(), inventory.getSlotCurrentMax())) {
                 int newSlot = inventory.getSlotCurrent();
                 String added = repository.addItemToInventory(invId, itemId);
-                items.add(item);
+                items.add(item);//Tilføjer item, hvis getSlotCurrent() og getSlotCurrentMax er true
                 newSlot ++;
-                inventory.setSlotCurrent(newSlot);
-                String setSlot = repository.setSlot(newSlot, invId);
+                inventory.setSlotCurrent(newSlot);//Tilføjer til slot
+                String setSlot = repository.setSlot(newSlot, invId);//Sender det til databasen
                 System.out.println("Slot set: " + setSlot);
                 newWeight = (inventory.getWeightCurrent() + item.getWeight());
                 inventory.setWeightCurrent(newWeight);
@@ -97,16 +97,16 @@ public class UseCase {
     }
 
     public String removeItemFromInventory(int invId, int itemId) {
-        Item item = repository.getOneItem(itemId);
+        Item item = repository.getOneItem(itemId);//Henter item
         String removed = repository.removeItemFromInventory(invId, itemId);
         if (removed != null) {
             for (int i = 0; i < items.size(); i++) {
                 Item obj = items.get(i);
                 if (obj.getId() == itemId) {
                     items.remove(i);
-                    inventory.setSlotCurrent (inventory.getSlotCurrent() - 1);
+                    inventory.setSlotCurrent (inventory.getSlotCurrent() - 1);//Sætter slot
                     if (checkItemStack(items, item)) {
-                        inventory.setSlotCurrent(inventory.getSlotCurrent() + 1);
+                        inventory.setSlotCurrent(inventory.getSlotCurrent() + 1);//Og trækker det tilbage, hvis den stack'er
                     }
                     inventory.setWeightCurrent(inventory.getWeightCurrent() - item.getWeight());
                     String slotSet = repository.setSlot(inventory.getSlotCurrent(), invId);
@@ -123,7 +123,7 @@ public class UseCase {
         for (Item currentItem : items) {
             System.out.println("Checking item: " + currentItem + " against " + item);
             if (currentItem.equals(item)) { // Sammenlign objekter
-                if (item.getType().equals("Consumable")) {
+                if (item.getType().equals("Consumable")) {//Og ser om typen er "Consumable"
                     System.out.println("Success: Item found in stack: " + currentItem.getName());
                     return true;
                 }
@@ -155,13 +155,13 @@ public class UseCase {
 
     public boolean checkGold(int invId) {
         int gold = 0;
-        for (int i = 0; i < items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) { //Kører items igennem for at se om der er guld nok
             if (items.get(i).getId() == 1) {
                 gold++;
             }
         }
         if (gold > 9) {
-            for (int i = 0; i <= 10; i++) {
+            for (int i = 0; i <= 10; i++) { //Fjerner 10 guld
                 removeItemFromInventory(invId, 1);
             }
             return true;
@@ -171,7 +171,7 @@ public class UseCase {
 
     public String increaseMaxSlot(int slotCurrentMax, int slotMax, int invId) {
         int slotNewCurrentMax;
-        if ((slotCurrentMax <= slotMax - 10) && (checkGold(invId))) {
+        if ((slotCurrentMax <= slotMax - 10) && (checkGold(invId))) {//Hvis der er slots ledige og guld nok
             slotNewCurrentMax = (slotCurrentMax + 10);
             inventory.setSlotCurrentMax(slotNewCurrentMax);
             String newSlotSize = repository.setSlotSize(slotNewCurrentMax, inventory.getId());
@@ -187,7 +187,7 @@ public class UseCase {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("Inventory.txt"));
             for (Item item : items) {
-                writer.write(item.toString() + "\n");
+                writer.write(item.toString() + "\n");//Skriver hvert item til fil, med liniemellemrum
             }
             writer.close();
         } catch (IOException ioe) {
@@ -235,7 +235,7 @@ public class UseCase {
 
     public List<Item> searchByType(String type) {
         List<Item> temp = new ArrayList<>();
-        for (Item item : items) {
+        for (Item item : items) { //Løber tingene igennem og returnerer dem, der passer med søgningen
             if (item.getType().toLowerCase().equals(type.toLowerCase())) {
                 temp.add(item);
             }
@@ -248,7 +248,7 @@ public class UseCase {
 
     public List<Item> searchByName(String name) {
         List<Item> temp = new ArrayList<>();
-        for (Item item : items) {
+        for (Item item : items) {//Løber tingene igennem og returnerer dem, der passer med søgningen
             if (item.getName().toLowerCase().contains(name.toLowerCase())) {
                 temp.add(item);
             }
@@ -258,7 +258,7 @@ public class UseCase {
         }
         return temp;
     }
-
+//Putter items i et hashmap, hvis de er "Consumables" for at vi kan vise dem når de "stacker"
     public Map<Item, Integer> showConsumables() {
         items = inventory.getItems();
         System.out.println("Following is in your inventory...\n");
@@ -274,7 +274,7 @@ public class UseCase {
         }
         return countItems;
     }
-
+//Viser de øvrige items (Armor og Weapon)
     public List<Item> showArmorAndWeapons() {
         items = inventory.getItems();
         ArrayList<Item> armorWeapons = new ArrayList<>();
