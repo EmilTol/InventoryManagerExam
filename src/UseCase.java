@@ -39,7 +39,9 @@ public class UseCase {
         //return null;
     }
 
-    public String createNewItem(Item item) {
+   // public String createNewItem(Item item) {
+    public String createNewItem(int id, String name, String type, int itemWeight, String itemDescription, int itemEffect) {
+        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
         String answer = repository.addItem(item);// Tilføjer det nye item objekt til databasen
         return answer;
     }
@@ -51,7 +53,8 @@ public class UseCase {
         List<Item> items1 = repository.getAllItems(); // Henter alle items fra databasen
         return items1;
     }
-    public String updateItem(Item item) {
+    public String updateItem(int id, String name, String type, int itemWeight, String itemDescription, int itemEffect) {
+        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect);
         String updated = repository.updateItem(item); // Tilføjer den opdateret item til database
         return updated;
     }
@@ -187,7 +190,7 @@ public class UseCase {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("Inventory.txt"));
             for (Item item : items) {
-                writer.write(item.toString() + "\n");//Skriver hvert item til fil, med liniemellemrum
+                writer.write(item.toString() + "\n");//Skriver hvert item til fil, med linieskift
             }
             writer.close();
         } catch (IOException ioe) {

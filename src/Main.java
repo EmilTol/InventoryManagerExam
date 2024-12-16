@@ -41,8 +41,7 @@ public class Main {
                         String itemDescription = input.nextLine(); // Læser bruger input for "description" til et nyt item
                         System.out.println("Enter item effect");
                         int itemEffect = input.nextInt(); // Læser bruger input for "effect" til et nyt item
-                        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
-                        String answer = useCase.createNewItem(item);
+                        String answer = useCase.createNewItem(id, name, type, itemWeight, itemDescription,itemEffect);
                         System.out.println(answer);
                     }
                     case 2 -> {
@@ -68,8 +67,7 @@ public class Main {
                         String itemDescription = input.nextLine(); // Læser bruger input for "description" som skal opdateres
                         System.out.println("Enter the new effect of the item: ");
                         int itemEffect = input.nextInt(); // Læser bruger input for "effect" som skal opdateres
-                        Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
-                        String updated = useCase.updateItem(item); // Kalder metoden updateItem
+                        String updated = useCase.updateItem(id, name, type, itemWeight, itemDescription, itemEffect); // Kalder metoden updateItem
                         System.out.println(updated);
                     }
                     case 4 -> {
@@ -138,7 +136,7 @@ public class Main {
                                     item.getEffect());
                         }
                         System.out.println("\nConsumables: ");
-                        System.out.println("Name------------Type------------Description----------Effect");
+                        System.out.println("Name------------Type------------Description----------Amount");
                         for (Map.Entry<Item, Integer> entry : consumables.entrySet()) {
                             System.out.printf("%-15s %-15s %-20s %-15d%n",
                                     entry.getKey().getName(),

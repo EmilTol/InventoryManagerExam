@@ -268,7 +268,7 @@ public class DatabaseRepository {
     }
 //Fjerner fra inventory
     public String removeItemFromInventory(int fkinventory, int fkitem) {
-        String sql = "DELETE FROM inventoryhasitem\nWHERE fkinventory = ? AND fkitem = ?\nLIMIT 1";
+        String sql = "DELETE FROM inventoryhasitem\nWHERE fkinventory = ? AND fkitem = ?\nLIMIT 1";//Sikrer at den returnerer 1
         try (Connection connection = DatabaseConnection.getconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, fkinventory);
