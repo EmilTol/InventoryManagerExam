@@ -69,16 +69,13 @@ public class UseCase {
         System.out.println(item.getType());
         if (checkWeight(item, inventory.getWeightCurrent(), inventory.getWeightMax())) {//Kalder vægttjek
             if (checkItemStack(items, item)) { // Kalder CheckItemStack
-//                if (checkAvailableSlotConsumable(inventory.getSlotCurrent(), inventory.getSlotCurrentMax())) {
                     String added = repository.addItemToInventory(invId, itemId);
                     newWeight = (inventory.getWeightCurrent() + item.getWeight());
                     inventory.setWeightCurrent(newWeight);//Sætter vægten
                     items.add(item);//Tilføjer item til listen
                     System.out.println("Item added: " + item);
                     return added;
-//                } else {
-//                    return "No available slots.";
-//                }
+
             } else if (checkAvailableSlot(inventory.getSlotCurrent(), inventory.getSlotCurrentMax())) {
                 int newSlot = inventory.getSlotCurrent();
                 String added = repository.addItemToInventory(invId, itemId);
@@ -149,12 +146,6 @@ public class UseCase {
         }
         return false;
     }
-//    public boolean checkAvailableSlotConsumable(int slotCurrent, int slotCurrentMax) {
-//        if ((slotCurrent <= slotCurrentMax)) {
-//            return true;
-//        }
-//        return false;
-//    }
 
     public boolean checkGold(int invId) {
         int gold = 0;
