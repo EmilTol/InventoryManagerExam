@@ -193,7 +193,7 @@ public class UseCase {
             }
             writer.close();
         } catch (IOException ioe) {
-            System.out.println("Fejl i export af fil");
+            System.out.println("Error in export of file");
             ioe.printStackTrace();
         }
         return "Inventory exported to file";
