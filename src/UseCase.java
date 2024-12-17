@@ -178,7 +178,6 @@ public class UseCase {
             slotNewCurrentMax = (slotCurrentMax + 10);
             inventory.setSlotCurrentMax(slotNewCurrentMax);
             String newSlotSize = repository.setSlotSize(slotNewCurrentMax, inventory.getId());
-            //System.out.println(newSlotSize);
 
             return "Slot size is now " + slotNewCurrentMax;
         } else {
