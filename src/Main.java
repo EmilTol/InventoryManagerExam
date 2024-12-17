@@ -8,7 +8,6 @@ public class Main {
     public static void main(String[] args) {
         UseCase useCase = new UseCase();
         Scanner input = new Scanner(System.in);
-//        DatabaseRepository repository = new DatabaseRepository(); // Opretter en ny Databaserepository instans
 
         System.out.println("---Initializing Inventory---");
         useCase.initiateInventory(1);// Initialiserer inventory med id 1

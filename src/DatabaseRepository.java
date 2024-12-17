@@ -74,7 +74,7 @@ public class DatabaseRepository {
 //Hvis rækker bliver opdateret så returnerer den at item er opdateret
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows > 0) {
-                System.out.println("Item updated");
+                return ("Item updated");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,7 +91,7 @@ public class DatabaseRepository {
             preparedStatement.setInt(1, id);
             int deletedRows = preparedStatement.executeUpdate();
             if (deletedRows > 0) {
-                System.out.println("Item number " + id + " deleted");
+                return ("Item deleted");
             }
         } catch (SQLException e) {
             e.printStackTrace();

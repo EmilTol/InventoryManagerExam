@@ -32,14 +32,10 @@ public class UseCase {
 
            inventory = new Inventory(inventoryId, slot, slotMax, weight, items);
 
-//            System.out.println(inventory.getId());
-//            System.out.println("Inventory initiated");
-        return "Inventory initiated";
-    }
-        //return null;
+            return "Inventory initiated";
+        }
     }
 
-   // public String createNewItem(Item item) {
     public String createNewItem(int id, String name, String type, int itemWeight, String itemDescription, int itemEffect) {
         Item item = new Item(id, name, type, itemWeight, itemDescription, itemEffect); // Opretter et nyt item objekt
         String answer = repository.addItem(item);// Tilføjer det nye item objekt til databasen
@@ -59,7 +55,7 @@ public class UseCase {
         return updated;
     }
     public int createNewInventory(int id){
-        int inventoryId = repository.createNewInventory(id); //Opretter ny inventory i database
+        int inventoryId = repository.createNewInventory(id); //Opretter nyt inventory i database
         return inventoryId;
     }
 
