@@ -113,7 +113,7 @@ public class Main {
                     }
 
                     case 8 -> {
-                        System.out.println("You have chosen to remove and item from your inventory.");
+                        System.out.println("You have chosen to remove an item from your inventory.");
                         System.out.println("Enter the id of the item to remove");
                         int itemId = input.nextInt(); // Læser bruger input for "id" af det item der skal fjernes
                         String removeFromInventory = useCase.removeItemFromInventory(useCase.inventory.getId(), itemId); // Fjerner item fra inventory
