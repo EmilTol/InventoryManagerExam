@@ -123,7 +123,7 @@ public class Main {
                     case 9 -> {
                         System.out.println("You have chosen to display all items in your inventory.");
 
-                        Map<Item, Integer> consumables = useCase.showConsumables(); // Viser consumables i inventory !=!=!=! Evt tilføj mere til den her, forstår den ikke godt nok !=!=!=!=!
+                        Map<Item, Integer> consumables = useCase.showConsumables(); // Viser consumables i inventory
                         List<Item> nonConsumableItems = useCase.showArmorAndWeapons(); // viser armor and weapons i inventory
                         System.out.println("Armor and weapons in inventory: ");
                         System.out.println("Name------------Type------------Description----------Effect");
